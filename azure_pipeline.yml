@@ -7,13 +7,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
   - task: PowerShell@2
+    displayName: "Run Puppeteer script"
     inputs:
+      filePath: 'floodrunner_upload.ps1'
+      arguments: '-apiAccessToken ${ApiAccessToken} -FilePath "floodrunner_landing_page.ts"'
+      failOnStderr: true
+      pwsh: true
